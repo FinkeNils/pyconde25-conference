@@ -78,7 +78,7 @@ v_cfg = PytanisBasicConfigModel.model_validate(cfg)
 # Read Reviews and all Submissions
 pretalx_client = PretalxClient(
     config=v_cfg, blocking=True)
-subs_count, subs = pretalx_client.submissions(cfg['event_name'], params={'questions': 'all', 'limit': 1000})
+subs_count, subs = pretalx_client.submissions(cfg['event_name'], params={'questions': 'all', 'limit': 1000, 'submission_type_id': '5090,5091,5092' })
 spkrs_count, spkrs = pretalx_client.speakers(cfg['event_name'], params={'questions': 'all', 'limit': 1000})
 revs_count, revs = pretalx_client.reviews(cfg['event_name'])
 subs, revs, spkrs = list(subs), list(revs), list(spkrs)
@@ -200,28 +200,19 @@ for idx, col in enumerate(subs_df.columns):
 
     format_cell_range(worksheet, col_id, fmt)
 
-# NOTE: The google sheets API has changed and now needs RBG instead of RGB color definitions. While I am creating a PR in the supporting webcolor package to fix the problem for pytanis, I am using the following workaround.
-from webcolors import name_to_rgb
-
 mask = (subs_df["State"] == 'rejected') | (subs_df["State"] == 'withdrawn') | (subs_df["State"] == 'canceled')
-firebrick_rgb_color = name_to_rgb('firebrick')
-mark_rows(worksheet, mask, [firebrick_rgb_color.red / 255, firebrick_rgb_color.green / 255, firebrick_rgb_color.blue / 255])
+mark_rows(worksheet, mask, 'firebrick')
 
 mask = (subs_df["State"] == 'confirmed')
-green_rgb_color = name_to_rgb('green')
-mark_rows(worksheet, mask, [green_rgb_color.red / 255, green_rgb_color.green / 255, green_rgb_color.blue / 255])
+mark_rows(worksheet, mask, 'green')
 
 mask = (subs_df["State"] == 'accepted')
-limegreen_rgb_color = name_to_rgb('limegreen')
-mark_rows(worksheet, mask, [limegreen_rgb_color.red / 255, limegreen_rgb_color.green / 255, limegreen_rgb_color.blue / 255])
+mark_rows(worksheet, mask, 'limegreen')
 
 mask = (subs_df["Pending state"] == 'rejected')
-lightcoral_rgb_color = name_to_rgb('lightcoral')
-mark_rows(worksheet, mask, [lightcoral_rgb_color.red / 255, lightcoral_rgb_color.green / 255, lightcoral_rgb_color.blue / 255])
+mark_rows(worksheet, mask, 'lightcoral')
 
 mask = (subs_df["Pending state"] == 'accepted')
-greenyellow_rgb_color = name_to_rgb('greenyellow')
-mark_rows(worksheet, mask, [greenyellow_rgb_color.red / 255, greenyellow_rgb_color.green / 255, greenyellow_rgb_color.blue / 255])
-
+mark_rows(worksheet, mask, 'greenyellow')
 
 print('Updated', len(subs_df), 'submissions.')

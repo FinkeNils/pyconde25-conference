@@ -2787,7 +2787,6 @@ packages:
   - structlog
   - tomli
   - tqdm
-  - webcolors
   - highspy ; extra == 'all'
   - ipywidgets ; extra == 'all'
   - pillow ; extra == 'all'
@@ -3618,11 +3617,6 @@ packages:
   sha256: 7607498efa04a3542ae3e05e64da8202e58159aa1fa4acddf7678d34a35d4f13
   requires_dist:
   - pyyaml>=3.10 ; extra == 'watchmedo'
-  requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/60/e8/c0e05e4684d13459f93d312077a9a2efbe04d59c393bc2b8802248c908d4/webcolors-24.11.1-py3-none-any.whl
-  name: webcolors
-  version: 24.11.1
-  sha256: 515291393b4cdf0eb19c155749a096f779f7d909f7cceea072791cb9095b92e9
   requires_python: '>=3.9'
 - pypi: https://files.pythonhosted.org/packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl
   name: webencodings
